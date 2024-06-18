@@ -8,7 +8,7 @@
     <string name="previous">Previous</string>
     <string name="Gender">Gender</string>
     <string name="Exercise">Exercise</string>
-    <string name="Do_you_have_power_meter">Do you have power meter?</string>
+    <string name="outdoor_or_indoor">Choose outdoor or indoor to test FTP</string>
 
 
     <string-array name="gender_array">
@@ -22,8 +22,6 @@
         <item>Moderate</item>
         <item>Intense</item>
     </string-array>
-
-
 
 
     <string name="lorem_ipsum">

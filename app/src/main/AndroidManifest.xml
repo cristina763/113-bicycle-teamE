@@ -25,8 +25,9 @@
         <activity android:name=".ActivityOne" />
         <activity android:name=".ActivityTwo" />
         <activity android:name=".ActivityThree" />
-        <activity android:name=".ActivityWithPowerMeter" />
-        <activity android:name=".ActivityWithoutPowerMeter" />
+        <activity android:name=".ChooseOutdoorOrIndoor" />
+        <activity android:name=".IndoorActivity" />
+        <activity android:name=".OutdoorActivity" />
     </application>
 
 </manifest>

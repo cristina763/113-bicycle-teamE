@@ -16,8 +16,8 @@ public class ActivityOne extends AppCompatActivity {
 
     private EditText editTextHeight, editTextWeight, editTextAge;
     private Spinner spinnerGender, spinnerExercise;
-    private RadioGroup radioGroupPowerMeter;
-    private RadioButton radioButtonYes, radioButtonNo;
+    //private RadioGroup radioGroupPowerMeter;
+    //private RadioGroup radioGroupInOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,9 @@ public class ActivityOne extends AppCompatActivity {
         editTextAge = findViewById(R.id.editTextAge);
         spinnerGender = findViewById(R.id.spinnerGender);
         spinnerExercise = findViewById(R.id.spinnerExercise);
-        radioGroupPowerMeter = findViewById(R.id.radioGroupPowerMeter);
-        radioButtonYes = findViewById(R.id.radioButtonYes);
-        radioButtonNo = findViewById(R.id.radioButtonNo);
+        //radioGroupPowerMeter = findViewById(R.id.radioGroupPowerMeter);
+        //radioButtonYes = findViewById(R.id.radioButtonYes);
+        //radioButtonNo = findViewById(R.id.radioButtonNo);
         Button buttonSubmit = findViewById(R.id.buttonSubmit);
 
         // 設置性別選項
@@ -50,16 +50,11 @@ public class ActivityOne extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int selectedPowerMeterId = radioGroupPowerMeter.getCheckedRadioButtonId();
-                if (selectedPowerMeterId == radioButtonYes.getId()) {
-                    Intent intent = new Intent(ActivityOne.this, ActivityWithPowerMeter.class);
-                    startActivity(intent);
-                } else if (selectedPowerMeterId == radioButtonNo.getId()) {
-                    Intent intent = new Intent(ActivityOne.this, ActivityWithoutPowerMeter.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(ActivityOne.this, ChooseOutdoorOrIndoor.class);
+                startActivity(intent);
             }
         });
     }
 }
+
 
