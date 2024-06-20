@@ -26,6 +26,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Date;
+
 
 public class ActivityOne extends AppCompatActivity {
 
@@ -103,7 +107,8 @@ public class ActivityOne extends AppCompatActivity {
         dataRow.createCell(4).setCellValue(exercise);
 
         try {
-            File file = new File(getExternalFilesDir(null), "UserData.xlsx");
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            File file = new File(getExternalFilesDir(null), "UserData_" + timestamp + ".xlsx");
             FileOutputStream outputStream = new FileOutputStream(file);
             workbook.write(outputStream);
             workbook.close();
