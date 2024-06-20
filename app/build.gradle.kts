@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.bmicalculator"
-        minSdk = 24
+        minSdk = 26   //原本是24 更改最小SDK版本
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -45,4 +44,8 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    // 添加 Apache POI 依賴項
+    implementation(libs.apache.poi)
+    implementation(libs.apache.poi.ooxml)
 }
+
