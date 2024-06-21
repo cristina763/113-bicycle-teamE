@@ -84,11 +84,29 @@ public class ActivityOne extends AppCompatActivity {
     }
     private void writeDataToExcel() {
         String height = editTextHeight.getText().toString();
+        int height1 = Integer.parseInt(height);
         String weight = editTextWeight.getText().toString();
+        int weight1 = Integer.parseInt(weight);
         String age = editTextAge.getText().toString();
+        int age1 = Integer.parseInt(age);
         String gender = spinnerGender.getSelectedItem().toString();
+        int gender1 = 0;
+        if (gender.equals("Male")){
+            gender1 = 0;
+        } else {
+            gender1 = 1;
+        }
         String exercise = spinnerExercise.getSelectedItem().toString();
-
+        int excercise1 = 0;
+        if (exercise.equals("None")){
+            excercise1 = 0;
+        } else if (exercise.equals("Light")) {
+            excercise1 = 1;
+        } else if (exercise.equals("Moderate")) {
+            excercise1 = 2;
+        } else {
+            excercise1 = 3;
+        }
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("User Data");
 
@@ -100,11 +118,11 @@ public class ActivityOne extends AppCompatActivity {
         headerRow.createCell(4).setCellValue("Exercise");
 
         Row dataRow = sheet.createRow(1);
-        dataRow.createCell(0).setCellValue(height);
-        dataRow.createCell(1).setCellValue(weight);
-        dataRow.createCell(2).setCellValue(age);
-        dataRow.createCell(3).setCellValue(gender);
-        dataRow.createCell(4).setCellValue(exercise);
+        dataRow.createCell(0).setCellValue(height1);
+        dataRow.createCell(1).setCellValue(weight1);
+        dataRow.createCell(2).setCellValue(age1);
+        dataRow.createCell(3).setCellValue(gender1);
+        dataRow.createCell(4).setCellValue(excercise1);
 
         try {
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
