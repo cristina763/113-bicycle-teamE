@@ -9,6 +9,14 @@
     <string name="Gender">Gender</string>
     <string name="Exercise">Exercise</string>
     <string name="outdoor_or_indoor">Choose outdoor or indoor to test FTP</string>
+    <string name="Outdoor">Outdoor</string>
+    <string name="Indoor">Indoor</string>
+    <string name="now_speed">目前速度</string>
+    <string name="now_power">目前功率</string>
+    <string name="continuous_time">持續時間</string>
+    <string name="now_time">目前時間</string>
+    <string name="now_heartbeat">目前心跳</string>
+    <string name="pause">中止</string>
 
 
     <string-array name="gender_array">
