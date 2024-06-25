@@ -15,6 +15,12 @@
             android:text="@string/Indoor"
             android:paddingTop="16dp"/>
 
+        <Button
+            android:id="@+id/buttonStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,13 +40,15 @@
             android:paddingTop="16dp"/>
 
         <TextView
+            android:id="@+id/textViewTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/now_heartbeat"
-            android:paddingTop="16dp"/>
+            android:text="@string/now_time"
+            android:paddingTop="16dp"
+            android:textSize="24sp" />
 
         <Button
-            android:id="@+id/buttonSubmit"
+            android:id="@+id/buttonPause"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pause" />
