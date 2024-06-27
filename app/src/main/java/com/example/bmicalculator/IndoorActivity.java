@@ -27,8 +27,7 @@ public class IndoorActivity extends AppCompatActivity {
             int mins = secs / 60;
             secs = secs % 60;
             int milliseconds = (int) (updateTime % 1000);
-            textViewTime.setText("" + mins + ":"
-                    + String.format("%02d", secs) + ":");
+            textViewTime.setText("" + mins + ":" + String.format("%02d", secs));
             /*textViewTime.setText("" + mins + ":"
                     + String.format("%02d", secs) + ":"
                     + String.format("%03d", milliseconds));*/
