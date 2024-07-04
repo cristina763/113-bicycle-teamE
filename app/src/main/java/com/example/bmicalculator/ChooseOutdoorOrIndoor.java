@@ -29,7 +29,7 @@ public class ChooseOutdoorOrIndoor extends AppCompatActivity {
         buttonOutdoor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChooseOutdoorOrIndoor.this, OutdoorActivity.class);
+                Intent intent = new Intent(ChooseOutdoorOrIndoor.this, ChooseMap.class);
                 startActivity(intent);
             }
         });
