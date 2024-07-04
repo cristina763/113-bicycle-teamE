@@ -27,6 +27,7 @@
         <activity android:name=".ChooseOutdoorOrIndoor" />
         <activity android:name=".IndoorActivity" />
         <activity android:name=".OutdoorActivity" />
+        <activity android:name=".ChooseMap" />
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -34,5 +35,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 
 </manifest>

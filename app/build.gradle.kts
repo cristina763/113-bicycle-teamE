@@ -47,5 +47,8 @@ dependencies {
     // 添加 Apache POI 依賴項
     implementation(libs.apache.poi)
     implementation(libs.apache.poi.ooxml)
+
+    // map
+    implementation(libs.recyclerview)
 }
 

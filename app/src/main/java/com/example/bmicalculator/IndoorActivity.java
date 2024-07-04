@@ -16,6 +16,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+//bluetooth
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothProfile;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
+//bluetooth
+
 
 public class IndoorActivity extends AppCompatActivity {
 
@@ -31,6 +44,8 @@ public class IndoorActivity extends AppCompatActivity {
 
     private LocationManager locationManager;
     private LocationListener locationListener;
+
+
 
     private Runnable updateTimerThread = new Runnable() {
         public void run() {
