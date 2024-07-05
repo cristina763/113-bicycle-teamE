@@ -55,13 +55,13 @@ public class ActivityOne extends AppCompatActivity {
         //radioButtonNo = findViewById(R.id.radioButtonNo);
         Button buttonSubmit = findViewById(R.id.buttonSubmit);
 
-        // 設置性別選項
+        // 性別選項
         ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_array, android.R.layout.simple_spinner_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(genderAdapter);
 
-        // 設置運動習慣選項
+        // 運動習慣選項
         ArrayAdapter<CharSequence> exerciseAdapter = ArrayAdapter.createFromResource(this,
                 R.array.exercise_array, android.R.layout.simple_spinner_item);
         exerciseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
