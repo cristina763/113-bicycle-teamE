@@ -48,7 +48,10 @@ dependencies {
     implementation(libs.apache.poi)
     implementation(libs.apache.poi.ooxml)
 
-    // map
+    // choosemap
     implementation(libs.recyclerview)
+
+    //google map
+
 }
 

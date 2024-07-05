@@ -35,10 +35,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
         Route route = routeList.get(position);
         holder.routeImage.setImageResource(route.getImageResId());
         holder.routeName.setText(route.getName());
-        holder.routeDetails.setText("難度: " + route.getDifficulty() +
-                "\n爬升: " + route.getElevation() + " 公尺" +
-                "\n距離: " + route.getDistance() + " 公里" +
-                "\n坡度: " + route.getSlope());
+        holder.routeDetails.setText("難度: " + route.getDifficulty() + "\n爬升: " + route.getElevation() + " 公尺" + "\n距離: " + route.getDistance() + " 公里" +  "\n坡度: " + route.getSlope());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, OutdoorActivity.class);
