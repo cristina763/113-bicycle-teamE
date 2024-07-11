@@ -1,6 +1,5 @@
 package com.example.bmicalculator;
 
-import android.content.Context;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
