@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -55,13 +57,13 @@ public class ActivityOne extends AppCompatActivity {
         //radioButtonNo = findViewById(R.id.radioButtonNo);
         Button buttonSubmit = findViewById(R.id.buttonSubmit);
 
-        // 性別選項
+        // 性別
         ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_array, android.R.layout.simple_spinner_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(genderAdapter);
 
-        // 運動習慣選項
+        // 運動習慣
         ArrayAdapter<CharSequence> exerciseAdapter = ArrayAdapter.createFromResource(this,
                 R.array.exercise_array, android.R.layout.simple_spinner_item);
         exerciseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -131,10 +133,11 @@ public class ActivityOne extends AppCompatActivity {
             workbook.write(outputStream);
             workbook.close();
             outputStream.close();
-            Log.d("Excel", "File saved to: " + file.getAbsolutePath());
+            Log.d("Excel", "Saved to: " + file.getAbsolutePath());
+            Toast.makeText(this, "Excel 文件已儲存至 " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("Excel", "Error writing file: " + e.getMessage());
+            Log.e("Excel", "文件寫入錯誤: " + e.getMessage());
         }
     }
     @Override
