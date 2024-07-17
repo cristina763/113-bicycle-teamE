@@ -22,6 +22,7 @@ public class ChooseMap extends AppCompatActivity {
         List<Route> routeList = new ArrayList<>();
         routeList.add(new Route("劍南路", "Lv. 1（簡易）", 123, 2.2, "10%（普通坡）", R.drawable.jiannanlu));
         routeList.add(new Route("大古山", "Lv. 1（簡易）", 79, 2.2, "11%（普通坡）", R.drawable.dagushan));
+        routeList.add(new Route("澄清湖", "Lv. 1（簡易）", 12, 7.1, "7%（緩坡）", R.drawable.chenchinhu));
 
         // Add more routes as needed
 

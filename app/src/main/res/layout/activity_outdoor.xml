@@ -41,7 +41,7 @@
             android:paddingTop="16dp"/>
 
         <TextView
-            android:id="@+id/textViewPower"
+            android:id="@+id/powerDataTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"

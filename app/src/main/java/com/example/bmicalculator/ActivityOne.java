@@ -37,7 +37,7 @@ public class ActivityOne extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
-    private EditText editTextHeight, editTextWeight, editTextAge;
+    private EditText editTextName, editTextHeight, editTextWeight, editTextAge;
     private Spinner spinnerGender, spinnerExercise;
     //private RadioGroup radioGroupPowerMeter;
     //private RadioGroup radioGroupInOut;
@@ -47,6 +47,7 @@ public class ActivityOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one);
 
+        editTextName = findViewById(R.id.editTextName);
         editTextHeight = findViewById(R.id.editTextHeight);
         editTextWeight = findViewById(R.id.editTextWeight);
         editTextAge = findViewById(R.id.editTextAge);
@@ -70,21 +71,21 @@ public class ActivityOne extends AppCompatActivity {
         spinnerExercise.setAdapter(exerciseAdapter);
 
         // 請求權限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-        }
+        }*/
 
         // 提交按鈕點擊事件
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                writeDataToExcel();
+                //writeDataToExcel();
                 Intent intent = new Intent(ActivityOne.this, ChooseOutdoorOrIndoor.class);
                 startActivity(intent);
             }
         });
     }
-    private void writeDataToExcel() {
+    /*private void writeDataToExcel() {
         String height = editTextHeight.getText().toString();
         int height1 = Integer.parseInt(height);
         String weight = editTextWeight.getText().toString();
@@ -139,8 +140,8 @@ public class ActivityOne extends AppCompatActivity {
             e.printStackTrace();
             Log.e("Excel", "文件寫入錯誤: " + e.getMessage());
         }
-    }
-    @Override
+    }*/
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
@@ -152,8 +153,8 @@ public class ActivityOne extends AppCompatActivity {
                 Log.d("Permission", "WRITE_EXTERNAL_STORAGE permission denied");
             }
         }
-    }
-}
+    }*/
 
+}
 
 
