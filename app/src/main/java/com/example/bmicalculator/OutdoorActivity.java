@@ -252,7 +252,7 @@ public class OutdoorActivity extends AppCompatActivity {
                 int power = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8);
                 result.append("Power: ").append(power).append("W");
 
-                int index = 4;
+                /*int index = 4;
                 if ((flags & 0x0001) != 0) {
                     int balance = data[index] & 0xFF;
                     result.append(", Pedal Balance: ").append(balance).append("%");
@@ -270,7 +270,7 @@ public class OutdoorActivity extends AppCompatActivity {
                     int lastCrankEventTime = (data[index + 2] & 0xFF) | ((data[index + 3] & 0xFF) << 8);
                     result.append(", Crank Revs: ").append(crankRevs).append(", Last Crank Event Time: ").append(lastCrankEventTime);
                     index += 4;
-                }
+                }*/
             } else {
                 return "無效數據";
             }
