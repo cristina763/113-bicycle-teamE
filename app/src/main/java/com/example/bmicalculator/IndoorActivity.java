@@ -24,7 +24,7 @@ public class IndoorActivity extends AppCompatActivity {
     private long timeInMilliseconds = 0L;
     private long timeSwapBuff = 0L;
     private long updateTime = 0L;
-    private long countdownTime = 1200 * 1000L;  // 20 minutes in milliseconds
+    private long countdownTime = 1200 * 1000L;  // 20 minutes (以毫秒表示)
     private boolean isRunning = false;
 
     private LocationManager locationManager;
@@ -43,7 +43,7 @@ public class IndoorActivity extends AppCompatActivity {
             if (updateTime <= 0) {
                 handler.removeCallbacks(this);
                 isRunning = false;
-                Toast.makeText(IndoorActivity.this, "Time's up!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IndoorActivity.this, "Time's up.", Toast.LENGTH_SHORT).show();
             } else {
                 handler.postDelayed(this, 100);
             }
@@ -68,7 +68,7 @@ public class IndoorActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(@NonNull Location location) {
                 float speed = location.getSpeed(); // m/s
-                float speedKMH = (speed * 3600) / 1000; // convert to km/h
+                float speedKMH = (speed * 3600) / 1000; // 轉成km/h
 
                 // Update UI with speed
                 textViewSpeed.setText(String.format("%.2f km/h", speedKMH));
@@ -84,7 +84,6 @@ public class IndoorActivity extends AppCompatActivity {
             public void onProviderDisabled(String provider) {}
         };
 
-        // Start button click listener
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +107,6 @@ public class IndoorActivity extends AppCompatActivity {
             }
         });
 
-        // Pause button click listener
         buttonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +122,7 @@ public class IndoorActivity extends AppCompatActivity {
         });
     }
 
-    // Handle permission request result
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
