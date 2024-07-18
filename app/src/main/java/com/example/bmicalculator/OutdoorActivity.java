@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class OutdoorActivity extends AppCompatActivity {
-
     private TextView textViewTime, textViewSpeed;
     private Button buttonStart, buttonPause;
     private Handler handler = new Handler();
@@ -54,7 +53,7 @@ public class OutdoorActivity extends AppCompatActivity {
     private long timeSwapBuff = 0L;
     private long updateTime = 0L;
     private boolean isRunning = false;
-    private boolean isRecordingSpeed = false;
+    //private boolean isRecordingSpeed = false;
 
     private LocationManager locationManager;
     private LocationListener locationListener;
