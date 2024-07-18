@@ -18,7 +18,7 @@
     <string name="now_heartbeat">目前心跳</string>
     <string name="start">開始</string>
     <string name="pause">中止</string>
-
+    <string name="remain_time">剩餘時間</string>
 
     <string-array name="gender_array">
         <item>Male</item>
