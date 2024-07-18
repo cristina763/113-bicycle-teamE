@@ -8,7 +8,7 @@
     <string name="previous">Previous</string>
     <string name="Gender">Gender</string>
     <string name="Exercise">Exercise</string>
-    <string name="outdoor_or_indoor">Choose outdoor or indoor to test FTP</string>
+    <string name="outdoor_or_indoor">選擇室內or室外場景以測試FTP</string>
     <string name="Outdoor">Outdoor</string>
     <string name="Indoor">Indoor</string>
     <string name="now_speed">目前速度</string>
