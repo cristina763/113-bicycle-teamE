@@ -1,6 +1,5 @@
 package com.example.bmicalculator;
 
-import android.content.Context;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -16,50 +15,38 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-//bluetooth
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCallback;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattService;
-import android.bluetooth.BluetoothProfile;
-import android.content.BroadcastReceiver;
-import android.content.Intent;
-import android.content.IntentFilter;
-//bluetooth
-
-
 public class IndoorActivity extends AppCompatActivity {
 
-    private TextView textViewTime,textViewSpeed;
-    private Button buttonStart;
-    private Button buttonPause;
+    private TextView textViewTime, textViewSpeed;
+    private Button buttonStart, buttonPause;
     private Handler handler = new Handler();
     private long startTime = 0L;
     private long timeInMilliseconds = 0L;
     private long timeSwapBuff = 0L;
     private long updateTime = 0L;
+    private long countdownTime = 1200 * 1000L;  // 20 minutes in milliseconds
     private boolean isRunning = false;
 
     private LocationManager locationManager;
     private LocationListener locationListener;
 
-
-
     private Runnable updateTimerThread = new Runnable() {
         public void run() {
             timeInMilliseconds = System.currentTimeMillis() - startTime;
-            updateTime = timeSwapBuff + timeInMilliseconds;
+            updateTime = countdownTime - (timeSwapBuff + timeInMilliseconds);
             int secs = (int) (updateTime / 1000);
             int mins = secs / 60;
             secs = secs % 60;
-            int milliseconds = (int) (updateTime % 1000);
+
             textViewTime.setText("" + mins + ":" + String.format("%02d", secs));
-            /*textViewTime.setText("" + mins + ":"
-                    + String.format("%02d", secs) + ":"
-                    + String.format("%03d", milliseconds));*/
-            handler.postDelayed(this, 100);
+
+            if (updateTime <= 0) {
+                handler.removeCallbacks(this);
+                isRunning = false;
+                Toast.makeText(IndoorActivity.this, "Time's up!", Toast.LENGTH_SHORT).show();
+            } else {
+                handler.postDelayed(this, 100);
+            }
         }
     };
 
@@ -86,6 +73,7 @@ public class IndoorActivity extends AppCompatActivity {
                 // Update UI with speed
                 textViewSpeed.setText(String.format("%.2f km/h", speedKMH));
             }
+
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {}
 
@@ -95,6 +83,7 @@ public class IndoorActivity extends AppCompatActivity {
             @Override
             public void onProviderDisabled(String provider) {}
         };
+
         // Start button click listener
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +141,3 @@ public class IndoorActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
