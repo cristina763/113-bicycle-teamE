@@ -137,7 +137,7 @@ public class OutdoorActivity extends AppCompatActivity {
             public void onProviderDisabled(String provider) {}
         };
 
-        // 開始按鈕點擊監聽
+        // 開始按鈕
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +146,7 @@ public class OutdoorActivity extends AppCompatActivity {
             }
         });
 
-        // 暫停按鈕點擊監聽
+        // 暫停按鈕
         buttonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,7 +232,7 @@ public class OutdoorActivity extends AppCompatActivity {
 
                 final String powerData = parsePowerData(data); // 自行實現的數據解析方法
 
-                Log.d(TAG, "解析后的功率數據: " + powerData);
+                Log.d(TAG, "解析後的功率數據: " + powerData);
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -244,7 +244,7 @@ public class OutdoorActivity extends AppCompatActivity {
             }
         }
         private String parsePowerData(byte[] data) {
-            Log.d(TAG, "接收到的數據: " + Arrays.toString(data)); // 打印原始數據
+            Log.d(TAG, "接收到的數據: " + Arrays.toString(data)); // 原始數據print
 
             StringBuilder result = new StringBuilder();
             if (data.length >= 4) {
@@ -367,16 +367,16 @@ public class OutdoorActivity extends AppCompatActivity {
         }
 
         long previousTime = speedIntervals.get(key);
-        speedIntervals.put(key, previousTime + 1); // 每秒增加1
+        speedIntervals.put(key, previousTime + 1); // 每秒加1
     }
 
-    // 匯出至 Excel 方法
+    // 匯出至 Excel
     private void exportToExcel() {
         if (isExternalStorageWritable()) {
             Workbook workbook = new XSSFWorkbook();
             Sheet sheet = workbook.createSheet("速度數據");
 
-            // 創建標題列
+            // 標題列
             Row headerRow = sheet.createRow(0);
             headerRow.createCell(0).setCellValue("速度區間 (公里/時)");
             headerRow.createCell(1).setCellValue("時間 (秒)");
@@ -389,7 +389,7 @@ public class OutdoorActivity extends AppCompatActivity {
                 dataRow.createCell(1).setCellValue(entry.getValue());
             }
 
-            // 儲存工作簿至文件
+            // 儲存excel至文件
             try {
                 String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
                 File file = new File(getExternalFilesDir(null), "OutdoorActivity_" + timestamp + ".xlsx");

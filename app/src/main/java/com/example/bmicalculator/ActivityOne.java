@@ -75,7 +75,7 @@ public class ActivityOne extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }*/
 
-        // 提交按鈕點擊事件
+        // 提交按鈕點擊
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
