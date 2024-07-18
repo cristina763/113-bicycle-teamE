@@ -57,7 +57,6 @@
             android:id="@+id/textViewTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/now_time"
             android:paddingTop="16dp"
             android:textSize="24sp" />
 
