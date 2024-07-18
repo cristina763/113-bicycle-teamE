@@ -180,8 +180,8 @@ public class OutdoorActivity extends AppCompatActivity {
             super.onConnectionStateChange(gatt, status, newState);
 
             if (newState == BluetoothGatt.STATE_CONNECTED) {
-                Log.i(TAG, "已連接到感測器");
-                runOnUiThread(() -> Toast.makeText(OutdoorActivity.this, "已連接到感測器", Toast.LENGTH_SHORT).show());
+                Log.i(TAG, "已連接到功率踏板");
+                runOnUiThread(() -> Toast.makeText(OutdoorActivity.this, "已連接到功率踏板", Toast.LENGTH_SHORT).show());
 
                 // 檢查是否有權限
                 if (ContextCompat.checkSelfPermission(OutdoorActivity.this, Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED &&
@@ -191,8 +191,8 @@ public class OutdoorActivity extends AppCompatActivity {
                     Log.e(TAG, "缺少藍牙權限，無法發現服務");
                 }
             } else if (newState == BluetoothGatt.STATE_DISCONNECTED) {
-                Log.i(TAG, "與感測器斷開連接");
-                runOnUiThread(() -> Toast.makeText(OutdoorActivity.this, "與感測器斷開連接", Toast.LENGTH_SHORT).show());
+                Log.i(TAG, "與踏板中斷連接");
+                runOnUiThread(() -> Toast.makeText(OutdoorActivity.this, "與踏板中斷連接", Toast.LENGTH_SHORT).show());
             }
         }
 
