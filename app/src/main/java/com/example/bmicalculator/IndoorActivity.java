@@ -15,6 +15,37 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothManager;
+
+import android.content.Context;
+import android.os.Build;
+import android.os.Environment;
+import android.util.Log;
+import androidx.core.content.ContextCompat;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class IndoorActivity extends AppCompatActivity {
 
     private TextView textViewTime, textViewSpeed;
@@ -26,9 +57,27 @@ public class IndoorActivity extends AppCompatActivity {
     private long updateTime = 0L;
     private long countdownTime = 1200 * 1000L;  // 20 minutes (以毫秒表示)
     private boolean isRunning = false;
+    private boolean isRecordingSpeed = false;
 
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+
+    private Map<String, Long> speedIntervals = new HashMap<>();
+
+    private static final String TAG = "blue";
+    String Dev_SERVICE_UUID = "00001818-0000-1000-8000-00805F9B34FB";
+    String Dev_CHAR_UUID_R = "00002A63-0000-1000-8000-00805F9B34FB";
+    String Dev_CHAR_UUID_W = "6A4E4C80-667B-11E3-949A-0800200C9A66";
+    String Dev_Mac = "C5:89:0A:0A:B8:8B";
+    String Descriptor_UUID = "00002902-0000-1000-8000-00805f9b34fb"; // 常見的通知描述符UUID
+
+    private static final int PERMISSION_REQUEST_CODE_BLUE = 1;
+
+    private BluetoothAdapter bluetoothAdapter;
+    private BluetoothGatt bluetoothGatt;
+    private BluetoothGattCharacteristic readCharacteristic;
+    private TextView powerDataTextView;
 
     private Runnable updateTimerThread = new Runnable() {
         public void run() {
@@ -55,10 +104,21 @@ public class IndoorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indoor);
 
+        BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        bluetoothAdapter = bluetoothManager.getAdapter();
+
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            Toast.makeText(this, "請啟用藍牙", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         textViewTime = findViewById(R.id.textViewTime);
         textViewSpeed = findViewById(R.id.textViewSpeed);
         buttonStart = findViewById(R.id.buttonStart);
         buttonPause = findViewById(R.id.buttonPause);
+        powerDataTextView = findViewById(R.id.powerDataTextView);
+
+
 
         // Location Manager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

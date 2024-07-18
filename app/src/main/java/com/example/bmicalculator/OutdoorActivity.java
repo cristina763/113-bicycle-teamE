@@ -61,7 +61,7 @@ public class OutdoorActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
-    private Map<String, Long> speedIntervals = new HashMap<>();
+    private Map<String, Long> powerIntervals = new HashMap<>();
 
     private static final String TAG = "blue";
     String Dev_SERVICE_UUID = "00001818-0000-1000-8000-00805F9B34FB";
@@ -87,10 +87,10 @@ public class OutdoorActivity extends AppCompatActivity {
             textViewTime.setText(String.format("%d:%02d", mins, secs));
             handler.postDelayed(this, 100);
 
-            if (isRecordingSpeed && timeInMilliseconds % 1000 < 100) {
+            /*if (isRecordingSpeed && timeInMilliseconds % 1000 < 100) {
                 float speed = getCurrentSpeed();
                 updateSpeedIntervals(speed);
-            }
+            }*/
         }
     };
 
@@ -113,9 +113,9 @@ public class OutdoorActivity extends AppCompatActivity {
         buttonPause = findViewById(R.id.buttonPause);
         powerDataTextView = findViewById(R.id.powerDataTextView);
 
-        speedIntervals.put("0-5", 0L);
-        speedIntervals.put("5-10", 0L);
-        speedIntervals.put("10-15", 0L);
+        powerIntervals.put("0-10", 0L);
+        powerIntervals.put("10-50", 0L);
+        powerIntervals.put("50-100", 0L);
 
         // Location Manager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -238,11 +238,21 @@ public class OutdoorActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Log.d(TAG, "更新UI上的功率數據: " + powerData);
-                        powerDataTextView.setText("功率數據: " + powerData);
+                        powerDataTextView.setText(powerData);
+
+                        // 更新功率區間時間
+                        int power = extractPowerValue(powerData);
+                        updatePowerIntervals(power);
                     }
                 });
             }
         }
+        private int extractPowerValue(String powerData) {
+            // 假設功率數據的格式是 "XXXW"
+            String[] parts = powerData.split(" ");
+            return Integer.parseInt(parts[0].replace("W", ""));
+        }
+
         private String parsePowerData(byte[] data) {
             Log.d(TAG, "接收到的數據: " + Arrays.toString(data)); // 原始數據print
 
@@ -250,7 +260,7 @@ public class OutdoorActivity extends AppCompatActivity {
             if (data.length >= 4) {
                 int flags = (data[0] & 0xFF) | ((data[1] & 0xFF) << 8);
                 int power = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8);
-                result.append("Power: ").append(power).append("W");
+                result.append(power).append(" W");
 
                 /*int index = 4;
                 if ((flags & 0x0001) != 0) {
@@ -304,7 +314,6 @@ public class OutdoorActivity extends AppCompatActivity {
             startTime = System.currentTimeMillis();
             handler.postDelayed(updateTimerThread, 0);
             isRunning = true;
-            isRecordingSpeed = true; // 開始記錄速度
 
             // 檢查並請求位置權限
             requestLocationUpdates();
@@ -317,7 +326,6 @@ public class OutdoorActivity extends AppCompatActivity {
             timeSwapBuff += timeInMilliseconds;
             handler.removeCallbacks(updateTimerThread);
             isRunning = false;
-            isRecordingSpeed = false; // 停止記錄速度
 
             // 移除位置更新
             locationManager.removeUpdates(locationListener);
@@ -356,34 +364,34 @@ public class OutdoorActivity extends AppCompatActivity {
     }
 
     // 更新速度區間時間
-    private void updateSpeedIntervals(float speed) {
+    private void updatePowerIntervals(float power) {
         String key;
-        if (speed < 5) {
-            key = "0-5";
-        } else if (speed < 10) {
-            key = "5-10";
+        if (power < 10) {
+            key = "0-10";
+        } else if (power < 50) {
+            key = "10-50";
         } else {
-            key = "10-15";
+            key = "50-100";
         }
 
-        long previousTime = speedIntervals.get(key);
-        speedIntervals.put(key, previousTime + 1); // 每秒加1
+        long previousTime = powerIntervals.get(key);
+        powerIntervals.put(key, previousTime + 1); // 每秒加1
     }
 
     // 匯出至 Excel
     private void exportToExcel() {
         if (isExternalStorageWritable()) {
             Workbook workbook = new XSSFWorkbook();
-            Sheet sheet = workbook.createSheet("速度數據");
+            Sheet sheet = workbook.createSheet("功率數據");
 
             // 標題列
             Row headerRow = sheet.createRow(0);
-            headerRow.createCell(0).setCellValue("速度區間 (公里/時)");
+            headerRow.createCell(0).setCellValue("功率區間 (W)");
             headerRow.createCell(1).setCellValue("時間 (秒)");
 
             // 添加數據
             int rowNum = 1;
-            for (Map.Entry<String, Long> entry : speedIntervals.entrySet()) {
+            for (Map.Entry<String, Long> entry : powerIntervals.entrySet()) {
                 Row dataRow = sheet.createRow(rowNum++);
                 dataRow.createCell(0).setCellValue(entry.getKey());
                 dataRow.createCell(1).setCellValue(entry.getValue());

@@ -8,7 +8,7 @@
     <string name="previous">Previous</string>
     <string name="Gender">Gender</string>
     <string name="Exercise">Exercise</string>
-    <string name="outdoor_or_indoor">選擇室內or室外場景以測試FTP</string>
+    <string name="outdoor_or_indoor">Choose Indoor or Outdoor to test FTP</string>
     <string name="Outdoor">Outdoor</string>
     <string name="Indoor">Indoor</string>
     <string name="now_speed">目前速度</string>
@@ -16,8 +16,8 @@
     <string name="continuous_time">持續時間</string>
     <string name="now_time">目前時間</string>
     <string name="now_heartbeat">目前心跳</string>
-    <string name="start">開始</string>
-    <string name="pause">中止</string>
+    <string name="start">Start</string>
+    <string name="pause">Stop</string>
     <string name="remain_time">剩餘時間</string>
 
     <string-array name="gender_array">
