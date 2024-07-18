@@ -41,6 +41,13 @@
             android:paddingTop="16dp"/>
 
         <TextView
+            android:id="@+id/powerDataTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:textSize="24sp" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/remain_time"

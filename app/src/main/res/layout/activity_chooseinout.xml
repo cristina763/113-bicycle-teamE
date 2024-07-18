@@ -10,19 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/outdoor_or_indoor"
-        android:paddingTop="16dp"/>
+        android:layout_centerInParent="true" />
 
     <Button
         android:id="@+id/buttonIndoor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Indoor" />
+        android:text="Indoor"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/buttonOutdoor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Outdoor"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
 
 </LinearLayout>

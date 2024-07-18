@@ -26,6 +26,7 @@
         <activity android:name=".ActivityThree" />
         <activity android:name=".ChooseOutdoorOrIndoor" />
         <activity android:name=".IndoorActivity" />
+        <activity android:name=".Indoor60Activity" />
         <activity android:name=".OutdoorActivity" />
         <activity android:name=".ChooseMap" />
         <activity android:name=".blue" />
