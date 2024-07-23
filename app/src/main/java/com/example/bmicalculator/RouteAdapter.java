@@ -1,10 +1,14 @@
 //選擇路線清單的RecyclerView相關
 package com.example.bmicalculator;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,36 +48,14 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
                 "\n坡度: " + route.getSlope());
 
         holder.itemView.setOnClickListener(v -> {
-            showRouteDialog(route);
+            Intent intent = new Intent(context, Googlemap.class);
+            intent.putExtra("imageResId", route.getImageResId());
+            intent.putExtra("name", route.getName());
+            intent.putExtra("start", route.getStartPoint());
+            intent.putExtra("end", route.getEndPoint());
+            // 如果需要，可以在這裡傳遞一些資料給 OutdoorActivity
+            context.startActivity(intent);
         });
-    }
-
-    private void showRouteDialog(Route route) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(route.getName());
-
-        String message = "難度: " + route.getDifficulty() +"\n爬升: " + route.getElevation() + " 公尺" +"\n距離: " + route.getDistance() + " 公里" +"\n坡度: " + route.getSlope();
-
-        builder.setMessage(message);
-
-        builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(context, OutdoorActivity.class);
-                // 你可以在這裡傳遞需要的數據給 OutdoorActivity
-                context.startActivity(intent);
-            }
-        });
-
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     @Override

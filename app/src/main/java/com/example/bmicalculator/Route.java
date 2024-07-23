@@ -8,14 +8,18 @@ public class Route {
     private double distance;
     private String slope;
     private int imageResId;
+    private String startPoint;
+    private String endPoint;
 
-    public Route(String name, String difficulty, int elevation, double distance, String slope, int imageResId) {
+    public Route(String name, String difficulty, int elevation, double distance, String slope, int imageResId, String startPoint, String endPoint) {
         this.name = name;
         this.difficulty = difficulty;
         this.elevation = elevation;
         this.distance = distance;
         this.slope = slope;
         this.imageResId = imageResId;
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
     }
 
     public String getName() {
@@ -41,4 +45,8 @@ public class Route {
     public int getImageResId() {
         return imageResId;
     }
+
+    public String getStartPoint() { return startPoint; }
+
+    public String getEndPoint() { return endPoint; }
 }

@@ -36,8 +36,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import java.util.HashMap;
@@ -45,7 +47,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class OutdoorActivity extends AppCompatActivity {
-    private TextView textViewTime, textViewSpeed;
+    private TextView textViewTime, textViewSpeed, textViewSlope;
     private Button buttonStart, buttonPause;
     private Handler handler = new Handler();
     private long startTime = 0L;
@@ -66,7 +68,7 @@ public class OutdoorActivity extends AppCompatActivity {
     String Dev_SERVICE_UUID = "00001818-0000-1000-8000-00805F9B34FB";
     String Dev_CHAR_UUID_R = "00002A63-0000-1000-8000-00805F9B34FB";
     String Dev_CHAR_UUID_W = "6A4E4C80-667B-11E3-949A-0800200C9A66";
-    String Dev_Mac = "C5:89:0A:0A:B8:8B";
+    String Dev_Mac = "F1:BD:39:6E:C1:B8";  //最終確認接什麼，要改
     String Descriptor_UUID = "00002902-0000-1000-8000-00805f9b34fb"; // 常見的通知描述符UUID
 
     private static final int PERMISSION_REQUEST_CODE_BLUE = 1;
@@ -75,6 +77,8 @@ public class OutdoorActivity extends AppCompatActivity {
     private BluetoothGatt bluetoothGatt;
     private BluetoothGattCharacteristic readCharacteristic;
     private TextView powerDataTextView;
+    private List<Location> locationList = new ArrayList<>();
+    private double maxSlope = 0.0;
 
     private Runnable updateTimerThread = new Runnable() {
         public void run() {
@@ -108,6 +112,7 @@ public class OutdoorActivity extends AppCompatActivity {
 
         textViewTime = findViewById(R.id.textViewTime);
         textViewSpeed = findViewById(R.id.textViewSpeed);
+        textViewSlope= findViewById(R.id.textViewSlope);
         buttonStart = findViewById(R.id.buttonStart);
         buttonPause = findViewById(R.id.buttonPause);
         powerDataTextView = findViewById(R.id.powerDataTextView);
@@ -307,12 +312,18 @@ public class OutdoorActivity extends AppCompatActivity {
     }
 
 
+
+
     // 開始追蹤方法
     private void startTracking() {
         if (!isRunning) {
             startTime = System.currentTimeMillis();
             handler.postDelayed(updateTimerThread, 0);
             isRunning = true;
+
+            // 清空位置列表和最大坡度
+            locationList.clear();
+            maxSlope = 0.0;
 
             // 檢查並請求位置權限
             requestLocationUpdates();
@@ -325,9 +336,11 @@ public class OutdoorActivity extends AppCompatActivity {
             timeSwapBuff += timeInMilliseconds;
             handler.removeCallbacks(updateTimerThread);
             isRunning = false;
-
             // 移除位置更新
             locationManager.removeUpdates(locationListener);
+            // 顯示最大坡度
+            //Toast.makeText(this, String.format("最大坡度: %.2f%%", maxSlope * 100), Toast.LENGTH_LONG).show();
+            textViewSlope.setText(String.format("%.2f%%", maxSlope * 100));
         }
     }
 
@@ -349,6 +362,18 @@ public class OutdoorActivity extends AppCompatActivity {
         float speed = location.getSpeed(); // m/s
         float speedKMH = (speed * 3600) / 1000; // 轉換為 km/h
         textViewSpeed.setText(String.format("%.2f 公里/時", speedKMH));
+
+        if (!locationList.isEmpty()) {
+            Location lastLocation = locationList.get(locationList.size() - 1);
+            double distance = location.distanceTo(lastLocation); // meters
+            double elevationChange = location.getAltitude() - lastLocation.getAltitude(); // meters
+            double slope = elevationChange / distance;
+
+            if (slope > maxSlope) {
+                maxSlope = slope;
+            }
+        }
+        locationList.add(location);
     }
 
     // 獲取當前速度
