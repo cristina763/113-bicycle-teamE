@@ -19,6 +19,7 @@
     <string name="start">Start</string>
     <string name="pause">Stop</string>
     <string name="remain_time">剩餘時間</string>
+    <string name="max_slope">最大坡度</string>
 
     <string-array name="gender_array">
         <item>Male</item>
