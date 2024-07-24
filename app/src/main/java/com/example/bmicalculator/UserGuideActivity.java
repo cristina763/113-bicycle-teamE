@@ -18,6 +18,8 @@ public class UserGuideActivity extends AppCompatActivity {
         pages.add(R.layout.page_one);
         pages.add(R.layout.page_two);
         pages.add(R.layout.page_three);
+        pages.add(R.layout.page_four);
+        pages.add(R.layout.page_five);
 
         UserGuideAdapter adapter = new UserGuideAdapter(pages);
         viewPager.setAdapter(adapter);
