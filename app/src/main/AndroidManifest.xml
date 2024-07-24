@@ -32,6 +32,7 @@
         <activity android:name=".blue" />
         <activity android:name=".ChooseTime" />
         <activity android:name=".Googlemap" />
+        <activity android:name=".UserGuideActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

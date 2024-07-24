@@ -387,7 +387,7 @@ public class OutdoorActivity extends AppCompatActivity {
         return 0.0f;
     }
 
-    // 更新速度區間時間
+    // 更新功率區間時間
     private void updatePowerIntervals(float power) {
         String key;
         if (power < 10) {
