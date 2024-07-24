@@ -45,7 +45,7 @@
         android:id="@+id/button_user_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="使用說明"
+        android:text="User Guide"
         android:layout_gravity="center_horizontal" />
 
 
