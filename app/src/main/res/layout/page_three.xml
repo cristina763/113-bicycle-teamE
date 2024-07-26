@@ -22,7 +22,7 @@
         android:layout_width="550dp"
         android:layout_height="550dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/pageone"
+        android:src="@drawable/pagethree"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
