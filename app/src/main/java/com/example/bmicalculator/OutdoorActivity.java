@@ -10,6 +10,7 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -341,6 +342,18 @@ public class OutdoorActivity extends AppCompatActivity {
             // 顯示最大坡度
             //Toast.makeText(this, String.format("最大坡度: %.2f%%", maxSlope * 100), Toast.LENGTH_LONG).show();
             textViewSlope.setText(String.format("%.2f%%", maxSlope * 100));
+
+            // 計算時間
+            int secs = (int) (updateTime / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            String formattedTime = String.format("%d:%02d", mins, secs);
+
+            // 創建 Intent 並傳遞數據
+            Intent intent = new Intent(OutdoorActivity.this, ResultActivity.class);
+            intent.putExtra("TIME", formattedTime);
+            intent.putExtra("MAX_SLOPE", maxSlope);
+            startActivity(intent);
         }
     }
 

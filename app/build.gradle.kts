@@ -51,7 +51,8 @@ dependencies {
     // choosemap
     implementation(libs.recyclerview)
 
-    //google map
+    //predict
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
 }
 
