@@ -60,19 +60,6 @@
             android:paddingTop="16dp"
             android:textSize="24sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/max_slope"
-            android:paddingTop="16dp"/>
-
-        <TextView
-            android:id="@+id/textViewSlope"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:textSize="24sp" />
-
         <Button
             android:id="@+id/buttonPause"
             android:layout_width="match_parent"

@@ -24,7 +24,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ResultActivity extends AppCompatActivity {
-    private TextView textViewTime, textViewSlope, textViewPredict;
+    private TextView textViewTime, textViewSlope, textViewFTP, textViewPredict;
     private EditText editTextAscent, editTextDistance, editTextSlope, editTextTime;
     private Button buttonSubmit;
 
@@ -35,6 +35,7 @@ public class ResultActivity extends AppCompatActivity {
 
         textViewTime = findViewById(R.id.textViewTime);
         textViewSlope = findViewById(R.id.textViewSlope);
+        textViewFTP = findViewById(R.id.textViewFTP);
         textViewPredict = findViewById(R.id.textViewPredict);
 
         editTextAscent = findViewById(R.id.editTextAscent);
@@ -47,10 +48,12 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String time = intent.getStringExtra("TIME");
         double maxSlope = intent.getDoubleExtra("MAX_SLOPE", 0.0);
+        String ftp = intent.getStringExtra("FTP");
 
         // 顯示數據
         textViewTime.setText(time);
         textViewSlope.setText(String.format("%.2f%%", maxSlope * 100));
+        textViewFTP.setText(ftp);
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +84,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void runModelAndDisplayResult() {
         File csvFile = new File(getExternalFilesDir(null), "input_data.csv");
-        String url = "https://660f-35-237-78-193.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
+        String url = "https://3d2a-34-106-210-166.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
 
         OkHttpClient client = new OkHttpClient();
 
