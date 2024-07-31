@@ -55,6 +55,7 @@ public class OutdoorActivity extends AppCompatActivity {
     private long timeInMilliseconds = 0L;
     private long timeSwapBuff = 0L;
     private long updateTime = 0L;
+    private long allsec = 0L;
     private boolean isRunning = false;
     //private boolean isRecordingSpeed = false;
 
@@ -113,14 +114,16 @@ public class OutdoorActivity extends AppCompatActivity {
 
         textViewTime = findViewById(R.id.textViewTime);
         textViewSpeed = findViewById(R.id.textViewSpeed);
-        textViewSlope= findViewById(R.id.textViewSlope);
+        //textViewSlope= findViewById(R.id.textViewSlope);
         buttonStart = findViewById(R.id.buttonStart);
         buttonPause = findViewById(R.id.buttonPause);
         powerDataTextView = findViewById(R.id.powerDataTextView);
 
-        powerIntervals.put("0-10", 0L);
-        powerIntervals.put("10-50", 0L);
-        powerIntervals.put("50-100", 0L);
+        for (int i = 0; i <= 300; i += 10) {
+            String key = i + "-" + (i + 10);
+            powerIntervals.put(key, 0L);
+        }
+
 
         // Location Manager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -157,6 +160,7 @@ public class OutdoorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 pauseTracking();
                 exportToExcel();
+                calculateFTP();
             }
         });
 
@@ -315,7 +319,7 @@ public class OutdoorActivity extends AppCompatActivity {
 
 
 
-    // 開始追蹤方法
+    // 開始tracking方法
     private void startTracking() {
         if (!isRunning) {
             startTime = System.currentTimeMillis();
@@ -341,13 +345,15 @@ public class OutdoorActivity extends AppCompatActivity {
             locationManager.removeUpdates(locationListener);
             // 顯示最大坡度
             //Toast.makeText(this, String.format("最大坡度: %.2f%%", maxSlope * 100), Toast.LENGTH_LONG).show();
-            textViewSlope.setText(String.format("%.2f%%", maxSlope * 100));
+            //textViewSlope.setText(String.format("%.2f%%", maxSlope * 100));
 
             // 計算時間
+            int allsec = (int) (updateTime / 1000);
             int secs = (int) (updateTime / 1000);
             int mins = secs / 60;
             secs = secs % 60;
-            String formattedTime = String.format("%d:%02d", mins, secs);
+            //String formattedTime = String.format("%d:%02d", mins, secs);
+            String formattedTime = String.format("%d",allsec);
 
             // 創建 Intent 並傳遞數據
             Intent intent = new Intent(OutdoorActivity.this, ResultActivity.class);
@@ -389,31 +395,20 @@ public class OutdoorActivity extends AppCompatActivity {
         locationList.add(location);
     }
 
-    // 獲取當前速度
-    private float getCurrentSpeed() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (lastLocation != null) {
-                return lastLocation.getSpeed();
-            }
-        }
-        return 0.0f;
-    }
-
     // 更新功率區間時間
     private void updatePowerIntervals(float power) {
-        String key;
-        if (power < 10) {
-            key = "0-10";
-        } else if (power < 50) {
-            key = "10-50";
-        } else {
-            key = "50-100";
+        String key = "300+";
+        for (int i = 0; i <= 300; i += 10) {
+            if (power < i + 10) {
+                key = i + "-" + (i + 10);
+                break;
+            }
         }
 
-        long previousTime = powerIntervals.get(key);
+        long previousTime = powerIntervals.getOrDefault(key, 0L);
         powerIntervals.put(key, previousTime + 1); // 每秒加1
     }
+
 
     // 匯出至 Excel
     private void exportToExcel() {
@@ -458,6 +453,29 @@ public class OutdoorActivity extends AppCompatActivity {
     private boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    private void calculateFTP() {
+        long totalDuration = 0;
+        long weightedSum = 0;
+
+        for (Map.Entry<String, Long> entry : powerIntervals.entrySet()) {
+            String key = entry.getKey();
+            long duration = entry.getValue();
+            int lowerBound = Integer.parseInt(key.split("-")[0]);
+            int upperBound = Integer.parseInt(key.split("-")[1]);
+            int midpoint = (lowerBound + upperBound) / 2;
+            totalDuration += duration;
+            weightedSum += midpoint * duration;
+        }
+
+        if (totalDuration > 0) {
+            double averagePower = (double) weightedSum / totalDuration;
+            //Log.d("AveragePowerintent", "FTP: " + averagePower);
+            //Toast.makeText(this, "FTP: " + averagePower, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(OutdoorActivity.this, ResultActivity.class);
+            intent.putExtra("FTP", averagePower);
+        }
     }
 
     // 處理權限請求結果
