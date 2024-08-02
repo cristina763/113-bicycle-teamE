@@ -60,7 +60,7 @@
             android:id="@+id/editTextDistance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="距離(換算為公尺)" />
+            android:hint="距離(公里)" />
 
         <EditText
             android:id="@+id/editTextSlope"
@@ -118,13 +118,13 @@
                     android:id="@+id/textViewFTP"
                     android:layout_width="30dp"
                     android:layout_height="56dp"
-                    android:layout_weight="1"
+                    android:layout_weight="5"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/textViewPredict"
                     android:layout_width="160dp"
-                    android:layout_height="52dp"
+                    android:layout_height="56dp"
                     android:layout_weight="1"
                     android:textSize="20sp" />
 
