@@ -10,6 +10,7 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -162,6 +163,7 @@ public class Indoor60Activity extends AppCompatActivity {
             public void onClick(View v) {
                 pauseTracking();
                 exportToExcel();
+                calculateFTP();
             }
         });
 
@@ -338,6 +340,8 @@ public class Indoor60Activity extends AppCompatActivity {
             isRunning = false;
             // 移除位置更新
             locationManager.removeUpdates(locationListener);
+            Intent intent = new Intent(Indoor60Activity.this, IndoorResultActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -430,6 +434,29 @@ public class Indoor60Activity extends AppCompatActivity {
     private boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    private void calculateFTP() {
+        long totalDuration = 0;
+        long weightedSum = 0;
+
+        for (Map.Entry<String, Long> entry : powerIntervals.entrySet()) {
+            String key = entry.getKey();
+            long duration = entry.getValue();
+            int lowerBound = Integer.parseInt(key.split("-")[0]);
+            int upperBound = Integer.parseInt(key.split("-")[1]);
+            int midpoint = (lowerBound + upperBound) / 2;
+            totalDuration += duration;
+            weightedSum += midpoint * duration;
+        }
+
+        if (totalDuration > 0) {
+            double averagePower = (double) weightedSum / totalDuration;
+            //Log.d("AveragePowerintent", "FTP: " + averagePower);
+            //Toast.makeText(this, "FTP: " + averagePower, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Indoor60Activity.this, IndoorResultActivity.class);
+            intent.putExtra("FTP", averagePower);
+        }
     }
 
     // 處理權限請求結果
