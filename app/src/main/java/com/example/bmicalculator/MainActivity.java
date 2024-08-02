@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonOne = findViewById(R.id.buttonOne);
         Button buttonTwo = findViewById(R.id.buttonTwo);
-        Button buttonThree = findViewById(R.id.buttonThree);
 
         buttonOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,17 +26,10 @@ public class MainActivity extends AppCompatActivity {
         buttonTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ActivityTwo.class);
+                Intent intent = new Intent(MainActivity.this, ChooseMap.class);
                 startActivity(intent);
             }
         });
 
-        buttonThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ActivityThree.class);
-                startActivity(intent);
-            }
-        });
     }
 }
