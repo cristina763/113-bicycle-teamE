@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityOne" />
-        <activity android:name=".ActivityTwo" />
         <activity android:name=".ActivityThree" />
         <activity android:name=".ChooseOutdoorOrIndoor" />
         <activity android:name=".IndoorActivity" />
