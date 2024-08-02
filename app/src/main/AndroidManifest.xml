@@ -33,8 +33,8 @@
         <activity android:name=".ChooseTime" />
         <activity android:name=".Googlemap" />
         <activity android:name=".UserGuideActivity" />
-        <activity android:name=".ResultActivity"></activity>
-
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".IndoorResultActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
