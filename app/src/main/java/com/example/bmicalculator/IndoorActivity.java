@@ -70,7 +70,7 @@ public class IndoorActivity extends AppCompatActivity {
     String Dev_SERVICE_UUID = "00001818-0000-1000-8000-00805F9B34FB";
     String Dev_CHAR_UUID_R = "00002A63-0000-1000-8000-00805F9B34FB";
     String Dev_CHAR_UUID_W = "6A4E4C80-667B-11E3-949A-0800200C9A66";
-    String Dev_Mac = "C5:89:0A:0A:B8:8B";
+    String Dev_Mac = "F1:BD:39:6E:C1:B8";  //最終確認接什麼，要改
     String Descriptor_UUID = "00002902-0000-1000-8000-00805f9b34fb"; // 常見的通知描述符UUID
 
     private static final int PERMISSION_REQUEST_CODE_BLUE = 1;
@@ -437,8 +437,8 @@ public class IndoorActivity extends AppCompatActivity {
     }
 
     private void calculateFTP() {
-        long totalDuration = 0;
-        long weightedSum = 0;
+        int totalDuration = 0;
+        int weightedSum = 0;
 
         for (Map.Entry<String, Long> entry : powerIntervals.entrySet()) {
             String key = entry.getKey();
@@ -451,11 +451,13 @@ public class IndoorActivity extends AppCompatActivity {
         }
 
         if (totalDuration > 0) {
-            double averagePower = (double) weightedSum / totalDuration;
-            //Log.d("AveragePowerintent", "FTP: " + averagePower);
-            //Toast.makeText(this, "FTP: " + averagePower, Toast.LENGTH_LONG).show();
+            int averagePower = (int) weightedSum / totalDuration;
+            String averagePower1 = String.format("%d",averagePower);
+            Log.d("AveragePowerintent", "FTP: " + averagePower);
+            Toast.makeText(this, "FTP: " + averagePower, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(IndoorActivity.this, IndoorResultActivity.class);
-            intent.putExtra("FTP", averagePower);
+            intent.putExtra("FTP", averagePower1);
+            startActivity(intent);
         }
     }
 

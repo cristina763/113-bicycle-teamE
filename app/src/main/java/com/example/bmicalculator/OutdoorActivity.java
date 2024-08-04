@@ -348,12 +348,12 @@ public class OutdoorActivity extends AppCompatActivity {
             //textViewSlope.setText(String.format("%.2f%%", maxSlope * 100));
 
             // 計算時間
-            int allsec = (int) (updateTime / 1000);
+            //int allsec = (int) (updateTime / 1000);
             int secs = (int) (updateTime / 1000);
             int mins = secs / 60;
             secs = secs % 60;
             //String formattedTime = String.format("%d:%02d", mins, secs);
-            String formattedTime = String.format("%d",allsec);
+            String formattedTime = String.format("%d",mins);
 
             // 創建 Intent 並傳遞數據
             Intent intent = new Intent(OutdoorActivity.this, ResultActivity.class);
@@ -456,8 +456,8 @@ public class OutdoorActivity extends AppCompatActivity {
     }
 
     private void calculateFTP() {
-        long totalDuration = 0;
-        long weightedSum = 0;
+        int totalDuration = 0;
+        int weightedSum = 0;
 
         for (Map.Entry<String, Long> entry : powerIntervals.entrySet()) {
             String key = entry.getKey();
@@ -470,11 +470,13 @@ public class OutdoorActivity extends AppCompatActivity {
         }
 
         if (totalDuration > 0) {
-            double averagePower = (double) weightedSum / totalDuration;
-            //Log.d("AveragePowerintent", "FTP: " + averagePower);
-            //Toast.makeText(this, "FTP: " + averagePower, Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(OutdoorActivity.this, ResultActivity.class);
-            intent.putExtra("FTP", averagePower);
+            int averagePower = (int) weightedSum / totalDuration;
+            String averagePower1 = String.format("%d",averagePower);
+            Log.d("AveragePowerintent", "FTP: " + averagePower);
+            Toast.makeText(this, "FTP: " + averagePower, Toast.LENGTH_LONG).show();
+            Intent intent1 = new Intent(OutdoorActivity.this, ResultActivity.class);
+            intent1.putExtra("FTP", averagePower1);
+            startActivity(intent1);
         }
     }
 
