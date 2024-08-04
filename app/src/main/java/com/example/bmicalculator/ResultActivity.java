@@ -49,7 +49,6 @@ public class ResultActivity extends AppCompatActivity {
         String time = intent.getStringExtra("TIME");
         double maxSlope = intent.getDoubleExtra("MAX_SLOPE", 0.0);
         String ftp = intent.getStringExtra("FTP");
-
         // 顯示數據
         textViewTime.setText(time);
         textViewSlope.setText(String.format("%.2f%%", maxSlope * 100));
@@ -84,7 +83,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void runModelAndDisplayResult() {
         File csvFile = new File(getExternalFilesDir(null), "input_data.csv");
-        String url = "https://3d2a-34-106-210-166.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
+        String url = "https://3c1f-35-184-64-106.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
 
         OkHttpClient client = new OkHttpClient();
 
