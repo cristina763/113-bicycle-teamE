@@ -49,7 +49,7 @@ import java.util.UUID;
 
 public class IndoorActivity extends AppCompatActivity {
 
-    private TextView textViewTime, textViewSpeed;
+    private TextView textViewTime;
     private Button buttonStart, buttonPause;
     private Handler handler = new Handler();
     private long startTime = 0L;
@@ -69,7 +69,7 @@ public class IndoorActivity extends AppCompatActivity {
     private static final String TAG = "blue";
     String Dev_SERVICE_UUID = "00001818-0000-1000-8000-00805F9B34FB";
     String Dev_CHAR_UUID_R = "00002A63-0000-1000-8000-00805F9B34FB";
-    String Dev_CHAR_UUID_W = "6A4E4C80-667B-11E3-949A-0800200C9A66";
+    //String Dev_CHAR_UUID_W = "6A4E4C80-667B-11E3-949A-0800200C9A66";
     String Dev_Mac = "F1:BD:39:6E:C1:B8";  //最終確認接什麼，要改
     String Descriptor_UUID = "00002902-0000-1000-8000-00805f9b34fb"; // 常見的通知描述符UUID
 
@@ -115,7 +115,7 @@ public class IndoorActivity extends AppCompatActivity {
         }
 
         textViewTime = findViewById(R.id.textViewTime);
-        textViewSpeed = findViewById(R.id.textViewSpeed);
+        //textViewSpeed = findViewById(R.id.textViewSpeed);
         buttonStart = findViewById(R.id.buttonStart);
         buttonPause = findViewById(R.id.buttonPause);
         powerDataTextView = findViewById(R.id.powerDataTextView);
@@ -135,7 +135,7 @@ public class IndoorActivity extends AppCompatActivity {
                 float speedKMH = (speed * 3600) / 1000; // 轉成km/h
 
                 // Update UI with speed
-                textViewSpeed.setText(String.format("%.2f km/h", speedKMH));
+                //textViewSpeed.setText(String.format("%.2f km/h", speedKMH));
             }
 
             @Override
@@ -240,7 +240,7 @@ public class IndoorActivity extends AppCompatActivity {
                 byte[] data = characteristic.getValue();
 
                 Log.d(TAG, "接收到的原始數據: " + Arrays.toString(data));
-                Log.d(TAG, "接收到的十六進制數據: " + bytesToHex(data)); // 十六進制格式顯示
+                Log.d(TAG, "接收到的十六進位數據: " + bytesToHex(data)); // 十六進制格式顯示
 
                 final String powerData = parsePowerData(data); // 自行實現的數據解析方法
 
@@ -362,7 +362,7 @@ public class IndoorActivity extends AppCompatActivity {
     private void updateSpeedUI(Location location) {
         float speed = location.getSpeed(); // m/s
         float speedKMH = (speed * 3600) / 1000; // 轉換為 km/h
-        textViewSpeed.setText(String.format("%.2f 公里/時", speedKMH));
+        //textViewSpeed.setText(String.format("%.2f 公里/時", speedKMH));
     }
 
     // 獲取當前速度
