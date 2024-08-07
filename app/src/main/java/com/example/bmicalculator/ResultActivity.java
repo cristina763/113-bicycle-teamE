@@ -83,7 +83,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void runModelAndDisplayResult() {
         File csvFile = new File(getExternalFilesDir(null), "input_data.csv");
-        String url = "https://3c1f-35-184-64-106.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
+        String url = "https://742e-35-184-64-106.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
 
         OkHttpClient client = new OkHttpClient();
 

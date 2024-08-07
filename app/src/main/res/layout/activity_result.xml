@@ -107,6 +107,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp">
 
+
                 <TextView
                     android:id="@+id/textViewFTP"
                     android:layout_width="30dp"
