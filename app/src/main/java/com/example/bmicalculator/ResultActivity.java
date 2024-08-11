@@ -26,7 +26,7 @@ import okhttp3.Response;
 public class ResultActivity extends AppCompatActivity {
     private TextView textViewTime, textViewSlope, textViewFTP, textViewPredict;
     private EditText editTextAscent, editTextDistance, editTextSlope, editTextTime;
-    private Button buttonSubmit;
+    private Button buttonSubmit, buttonGoToMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class ResultActivity extends AppCompatActivity {
         editTextSlope = findViewById(R.id.editTextSlope);
         editTextTime = findViewById(R.id.editTextTime);
         buttonSubmit = findViewById(R.id.buttonSubmit);
+        buttonGoToMain = findViewById(R.id.buttonGoToMain);
 
         // 接收數據
         Intent intent = getIntent();
@@ -66,6 +67,14 @@ public class ResultActivity extends AppCompatActivity {
                 runModelAndDisplayResult();
             }
         });
+        buttonGoToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResultActivity.this, MainActivity.class);
+                intent.putExtra("result", textViewPredict.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
     private void saveDataToCsv(String ascent, String distance, String slope, String time) {
         File csvFile = new File(getExternalFilesDir(null), "input_data.csv");
@@ -83,7 +92,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void runModelAndDisplayResult() {
         File csvFile = new File(getExternalFilesDir(null), "input_data.csv");
-        String url = "https://742e-35-184-64-106.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
+        String url = "https://b2c9-34-16-179-158.ngrok-free.app/predict"; // 用從Colab執行的ngrok URL
 
         OkHttpClient client = new OkHttpClient();
 
@@ -114,6 +123,9 @@ public class ResultActivity extends AppCompatActivity {
                         public void run() {
                             //Toast.makeText(ResultActivity.this, "預測結果: " + result, Toast.LENGTH_LONG).show();
                             textViewPredict.setText(result);
+                            //Intent intent = new Intent(ResultActivity.this, MainActivity.class);
+                            //intent.putExtra("result", result);
+                            //startActivity(intent);
                         }
                     });
                 }
