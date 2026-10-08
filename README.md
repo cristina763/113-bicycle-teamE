@@ -1,4 +1,4 @@
-<img width="1805" height="1025" alt="螢幕擷取畫面 2026-10-08 143226" src="https://github.com/user-attachments/assets/20a84b4b-a660-4c0a-a688-1fac975c990e" /># 自行車訓練與騎乘輔助 App（Team E）
+# 自行車訓練與騎乘輔助 App（Team E）
 
 將自行車功率裝置、手機感測資料、路線導航與 AI 分析服務整合為一套 Android 騎乘訓練流程。
 
@@ -41,21 +41,26 @@
 
 ## 專案畫面
 
-> 下列位置預留給實際 App 畫面；補圖時請遮蔽 API key、BLE MAC、臨時服務 URL、個人位置與測試資料。
+> 圖片中的 API key、BLE MAC、臨時服務 URL、個人位置與測試資料應先遮蔽。
 
-| 訓練模式選擇 | BLE 即時功率與計時 |
-|:---:|<img width="1805" height="1025" alt="螢幕擷取畫面 2026-10-08 143226" src="https://github.com/user-attachments/assets/cc8517d0-e3f9-4609-8c42-db89fca1b980" />|
-| **待補圖片** | **待補圖片** |
-| 路線資訊選擇清單 | FTP計算與等級預測結果 |
-|<img width="1112" height="1011" alt="螢幕擷取畫面 2026-10-08 165227" src="https://github.com/user-attachments/assets/67c80469-19c0-4d56-ae48-eeca105c9227" /> | <img width="469" height="1007" alt="螢幕擷取畫面 2026-10-08 143307" src="https://github.com/user-attachments/assets/d2408c65-7dcc-4686-939e-fb1bd3897cb8" /> |
+### BLE 即時功率與計時
 
-<!--
-建議圖片路徑：
-![訓練模式選擇](docs/training-mode.png)
-![BLE 即時功率與計時](docs/ble-training.png)
-![路線資訊與 Google Maps](docs/route-map.png)
-![AI 預測結果或 Excel 輸出](docs/result-export.png)
--->
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cc8517d0-e3f9-4609-8c42-db89fca1b980" alt="BLE 即時功率與計時畫面" width="760">
+</p>
+
+### 路線資訊選擇清單
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/67c80469-19c0-4d56-ae48-eeca105c9227" alt="路線資訊選擇清單畫面" width="520">
+</p>
+
+### FTP 計算與等級預測結果
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d2408c65-7dcc-4686-939e-fb1bd3897cb8" alt="FTP 計算與等級預測結果畫面" width="320">
+</p>
+
 
 ## AI 模型服務設定
 
