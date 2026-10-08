@@ -58,7 +58,7 @@
 ### FTP 計算與等級預測結果
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d2408c65-7dcc-4686-939e-fb1bd3897cb8" alt="FTP 計算與等級預測結果畫面" width="320">
+  <img src="https://github.com/user-attachments/assets/1af4222b-aad9-4825-ad83-210062debf26" alt="FTP 計算與等級預測結果畫面" width="320">
 </p>
 
 
