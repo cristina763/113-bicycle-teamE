@@ -52,5 +52,5 @@ jobs:
           fi
           git rm .github/workflows/history-cleanup.yml
           git commit -m "Finalize sensitive history cleanup"
-          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git remote set-url origin "https://github.com/${GITHUB_REPOSITORY}.git"
           git push --force origin master
