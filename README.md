@@ -63,7 +63,9 @@
 
 ## AI 模型服務設定
 
-[removed]
+Android App 透過 OkHttp 將騎乘資料上傳至 Python Flask `/predict` API，由線性迴歸模型產生騎乘等級預測結果。
+
+模型憑證、服務網址與部署設定不存放於此 repository。
 
 (AI model)Run Colab first. And get the URL.
 Paste to
