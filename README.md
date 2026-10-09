@@ -26,7 +26,7 @@
 - **非同步裝置連線：** 使用 Android BLE GATT 處理裝置連線、Service Discovery、Characteristic Notification 與 Cycling Power Measurement 封包。
 - **多來源資料同步：** 整合不同更新頻率的 BLE 功率、GPS 位置與訓練計時資料，再同步呈現在 Android UI。
 - **多種訓練情境：** 依室內短時間、室內長時間與戶外騎乘需求，提供不同計時、功率與路線流程。
-- **跨服務整合：** 將行動裝置、功率硬體、Google Maps、Excel 匯出與 Colab AI 模型串成端到端流程。
+- **跨服務整合：** 將行動裝置、功率硬體、Google Maps、Excel 匯出與 AI 模型串成端到端流程。
 - **實際環境限制：** 處理 Android 藍牙與定位權限、裝置識別、網路服務 URL 及外部 API 設定。
 
 ## 系統資料流
@@ -61,14 +61,8 @@
 </p>
 
 
-## AI 模型服務設定
+## AI 預測服務
 
 Android App 透過 OkHttp 將騎乘資料上傳至 Python Flask `/predict` API，由線性迴歸模型產生騎乘等級預測結果。
 
 模型憑證、服務網址與部署設定不存放於此 repository。
-
-(AI model)Run Colab first. And get the URL.
-Paste to
-![image](https://github.com/user-attachments/assets/ce713677-69f0-4723-b5e7-7486e4476fae)
-(https://....../predict)
-
