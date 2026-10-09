@@ -42,7 +42,7 @@
 ## 專案畫面
 
 
-### BLE 即時功率與計時
+### 測速、BLE 即時功率與計時
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/cc8517d0-e3f9-4609-8c42-db89fca1b980" alt="BLE 即時功率與計時畫面" width="760">
